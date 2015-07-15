@@ -1,5 +1,5 @@
 //Define an angular module for our app
-var app = angular.module('peetch', ['ngRoute','ngImgCrop','ngSocial','ngSanitize','infinite-scroll','pascalprecht.translate']);
+var app = angular.module('peetch', ['ngRoute','ngImgCrop', 'LocalStorageModule','ngSocial','ngSanitize','infinite-scroll','pascalprecht.translate']);
 
  
 //Define Routing for app
