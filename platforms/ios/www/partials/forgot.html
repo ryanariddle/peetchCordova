@@ -1,0 +1,28 @@
+<div class="col-md-12  col-xs-12 page" >
+<form class="form-horizontal">
+    <h1>{{ 'FORGOT' | translate}}</h1>
+    <div class="alert alert-danger" role="alert" ng-show="error">{{error}}</div>
+    <div class="alert alert-success" role="alert" ng-show="success">{{ 'MAIL_SENT' | translate}}</div>
+<fieldset>
+
+
+<!-- Mail input-->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="password">{{ 'EMAIL' | translate}}</label>
+  <div class="col-md-4">
+    <input name="mail" class="form-control input-md" ng-model="mail" type="mail"/>
+  </div>
+</div>
+
+<!-- Button -->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="connexionbutton"></label>
+  <div class="col-md-4">
+    <button name="connexionbutton" class="btn btn-primary" ng-click="sendmail()">{{ 'SEND_MAIL' | translate}}</button>
+  </div>
+</div>
+
+
+</fieldset>
+</form>
+</div>

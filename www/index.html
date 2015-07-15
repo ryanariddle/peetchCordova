@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html ng-app="peetch">
+    <head>
+        <title>Peetch</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+        <meta charset="utf-8"/>
+        <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css"/>
+        <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap-theme.min.css"/>
+        <link rel="stylesheet" href="bower_components/angular-social/angular-social.css"/>
+        <link rel="stylesheet" href="css/font-awesome.min.css"/>
+        <link href="bower_components/ng-img-crop/compile/minified/ng-img-crop.css" rel="stylesheet">
+        <link rel="icon" href="img/favicon.png"/>
+        <link rel="stylesheet" href="css/main.css"/>
+        <link rel="manifest" href="./manifest.json">
+    </head>
+    <body ng-controller="LayoutController">
+        <nav class="navbar navbar-default navbar-fixed-top">
+            <div class="container-fluid">
+                    <ul class="nav navbar-nav visible-lg visible-md hidden-sm hidden-xs" >
+                        <li> <a class="navbar-brand" href="#/">  <img alt="Brand" src="img/logo.png" >         </a></li>
+                        <li><a href="#/top/">{{ 'POPULAR' | translate}}</a></li>
+                        <li ng-show="user"><a href="#/profile/{{user._id}}/stories">{{ 'MY_PEETCHS' | translate}}</a></li>
+                        <li><a href="#/">{{ 'RECENT' | translate}}</a></li>
+                        <li ng-show="user"><a href="#/create/" class="nav-important">{{ 'CREATE' | translate}}</a></li>
+                    </ul>
+                    <ul class="nav navbar-nav visible-xs visible-sm hidden-md hidden-lg">
+                        <li> <a class="navbar-brand" href="#/">  <img alt="Brand" src="img/logo-small.png" >         </a></li>
+                        <li><a href="#/top/"><i class="glyphicon glyphicon-star"></i></a></li>
+                        <li><a href="#/stories/"><i class="glyphicon glyphicon-time"></i></a></li>
+                        <li ng-show="user"><a href="#/"><i class="glyphicon glyphicon-user"></i></a></li>
+                        <li ng-show="user"><a href="#/create/" class="nav-important"><i class="glyphicon glyphicon-pencil"></i></a></li>
+                    </ul>
+                
+                <ul class="navbar-right nav navbar-nav">
+                    <li>
+                        <a class="dropdown-toggle" data-toggle="dropdown" role="button" ng-show="user">
+                            <img class="avatar" ng-class="{'avatar-notif':newNotifs.length>0}" ng-src="{{user.avatar}}" on-error-src="img/default.png"/>
+                            <i class="glyphicon glyphicon-chevron-down"></i>
+                        </a>
+                        <ul class="dropdown-menu" role="menu">
+                        <li><a href="#/profile">{{ 'PROFILE' | translate}}</a></li>
+                        <li><a href="#/friends">{{ 'FRIENDS' | translate}}</a></li>
+                        <li><a href="#/profile/notifications">{{ 'NOTIFICATIONS' | translate}} <span class="badge" ng-show="newNotifs.length>0">{{newNotifs.length}}</span></a></li>
+                        <li class="divider"></li>
+                        <li><a href="#/" ng-click="logout()">{{ 'LOGOUT' | translate}}</a></li>
+                      </ul>
+                    </li>
+                    <li><a href="#/login/" class="nav-important visible-lg visible-md hidden-sm hidden-xs" ng-show="!user">{{ 'LOGIN' | translate}}</a></li>
+                    <li><a href="#/signup/" class="nav-important visible-lg visible-md hidden-sm hidden-xs"  ng-show="!user">{{ 'SIGNUP' | translate}}</a></li>
+                    <li><a href="#/login/" class="nav-important visible-xs visible-sm hidden-md hidden-lg" ng-show="!user"><i class="glyphicon glyphicon-log-in"></i></a></li>
+                    <li><a href="#/signup/" class="nav-important visible-xs visible-sm hidden-md hidden-lg"  ng-show="!user"><i class="glyphicon glyphicon-user"></i></a></li>
+                </ul>
+            </div>
+        </nav>
+        <div class="col-md-6 col-md-offset-2 col-xs-10 col-xs-offset-1 wrapper">
+            <div class="view col-md-12  col-xs-12" ng-view autoscroll="true">
+            </div>
+        </div>
+        <div class="col-lg-2 col-md-2 hidden-sm hidden-xs side">
+            <div class="col-md-12 support">
+                <h3>{{ 'ALPHA' | translate}}</h3>
+                <p>{{ 'FEEDBACK' | translate}}</p>
+                <a href="mailto:contact@peetch.co">{{ 'SEND_MAIL' | translate}}</a>
+            </div>
+            <img src="img/side-banner.png"/>
+            <img src="img/side-banner2.png"/>
+        </div>
+        <div class="col-md-6 col-md-offset-2 col-xs-10 col-xs-offset-1 footer">
+            <a href="" ng-click="changeLanguage('en')">English</a> • <a href="" ng-click="changeLanguage('fr')">Français</a>
+        </div>
+        
+        <script type="text/javascript" src="js/polyfill.js"></script>
+        <script type="text/javascript" src="js/tracking/analytics.js"></script>
+        <script type="text/javascript" src="bower_components/jquery/dist/jquery.min.js"></script>
+        <script type="text/javascript" src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="bower_components/angular/angular.min.js"></script>
+        <script type="text/javascript" src="bower_components/angular-translate/angular-translate.min.js"></script>
+        <script type="text/javascript" src="bower_components/angular-route/angular-route.min.js"></script>
+        <script type="text/javascript" src="bower_components/angular-sanitize/angular-sanitize.min.js"></script>
+        <script type="text/javascript" src="bower_components/ng-img-crop/compile/minified/ng-img-crop.js"></script>
+        <script type="text/javascript" src="bower_components/angular-social/angular-social.js"></script>
+        <script type="text/javascript" src="bower_components/ngInfiniteScroll/build/ng-infinite-scroll.min.js"></script>
+        <script type="text/javascript" src="js/app.js"></script>
+        <script type="text/javascript" src="js/filters/linky.js"></script>
+        <script type="text/javascript" src="js/services/user.js"></script>
+        <script type="text/javascript" src="js/services/api.js"></script>
+        <script type="text/javascript" src="js/services/url.js"></script>
+        <script type="text/javascript" src="js/directives/onErrorSrc.js"></script>
+        <script type="text/javascript" src="js/controllers/LayoutController.js"></script>
+        <script type="text/javascript" src="js/controllers/StoriesController.js"></script>
+        <script type="text/javascript" src="js/controllers/ProfileController.js"></script>
+        <script type="text/javascript" src="js/controllers/UserController.js"></script>
+        <script type="text/javascript" src="js/controllers/StoryController.js"></script>
+        <script type="text/javascript" src="js/controllers/CreateController.js"></script>
+        <script type="text/javascript" src="js/controllers/LoginController.js"></script>
+        <script type="text/javascript" src="js/controllers/PasswordController.js"></script>
+        <script type="text/javascript" src="js/controllers/SignupController.js"></script>
+        <script type="text/javascript" src="js/social/facebook.js"></script>
+        <script type="text/javascript" src="js/social/twitter.js"></script>
+    </body>
+</html>

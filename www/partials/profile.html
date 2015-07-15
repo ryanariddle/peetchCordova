@@ -1,0 +1,24 @@
+<div class="col-md-12  col-xs-12 page" >
+    <h1>{{ 'PROFILE' | translate }}</h1>
+    <div class="alert alert-danger" role="alert" ng-show="error">{{error}}</div>
+    <div class="col-md-12 form">
+        <div class="cropArea" >
+            <img-crop image="myImage" result-image="myCroppedImage" ng-show="editing"></img-crop>
+            <img ng-src="{{myImage}}" ng-show="!editing" on-error-src="img/default.png"/>
+        </div>
+    </div>
+    <div class="col-md-12 form" ng-show="editing">
+         <div>{{ 'SELECT_FILE' | translate }}: <input type="file" id="fileInput" /></div>
+    </div>
+    <div class="col-md-12 form" ng-show="!editing">
+        <button ng-click="edit()" class="btn btn-info">{{ 'EDIT' | translate }}</button>
+    </div>
+    <div class="col-md-12">
+        <h4>{{ 'BIO' | translate }}:</h4>
+        <textarea class="form-control" ng-model="bio">{{bio}}</textarea>
+    </div>
+    <div class="col-md-12 form">
+        <button ng-click="updateAvatar()" class="btn btn-info">{{ 'SAVE' | translate }}</button>
+    </div>
+    
+</div>

@@ -1,0 +1,54 @@
+<div class="col-md-12  col-xs-12 page" >
+<form class="form-horizontal">
+    <h2>{{'CREATE_STORY' | translate}}</h2>
+    <div class="alert alert-success" role="alert" ng-show="newstory">{{'STORY_CREATED' | translate}}</div>
+    <div class="alert alert-danger" role="alert" ng-show="error">{{error}}</div>
+<fieldset>
+<br>
+<div class="form-group">
+  <label class="col-md-4 control-label" for="textinput">{{'LENGTH' | translate}}</label>  
+  <div class="col-md-6">
+      <button class="btn-neutral" ng-click="story.length=8;reloadTriggers()" ng-class="{'btn-neutral-selected':story.length==8}">8</button>
+      <button class="btn-neutral" ng-click="story.length=16;reloadTriggers()" ng-class="{'btn-neutral-selected':story.length==16}">16</button>
+      <button class="btn-neutral" ng-click="story.length=32;reloadTriggers()" ng-class="{'btn-neutral-selected':story.length==32}">32</button>
+  </div>
+</div>
+
+<div class="form-group">
+  <label class="col-md-4 control-label" for="textinput">{{'TITLE' | translate}}</label>  
+  <div class="col-md-6">
+  <input name="textinput" class="form-control input-md" ng-model="story.title" type="text"/>
+  </div>
+</div>
+<br>
+<div class="form-group">
+    <label class="col-md-4 control-label bubble-avatar">
+        <img src="img/peetch.png"/>
+    </label>
+  <div class="col-md-6">
+     <p class="bubble-text bubble-text-peetch">
+         {{introduction}}
+      </p>
+  </div>
+</div>
+    
+<div class="form-group">
+    <label class="col-md-4 control-label bubble-avatar">
+    <img src="img/default.png"/>
+    </label>
+  <div class="col-md-6">
+     <textarea  class="bubble-text-area" ng-model="story.parts[0].text">lol</textarea>
+  </div>
+</div>
+
+
+<div class="form-group">
+  <label class="col-md-4 control-label" for="connexionbutton"></label>
+  <div class="col-md-4">
+    <button name="connexionbutton" class="btn btn-primary" ng-click="createStory()">{{'CREATE' | translate}}</button>
+  </div>
+</div>
+
+</fieldset>
+</form>
+</div>

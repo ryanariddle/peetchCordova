@@ -1,0 +1,139 @@
+<div class="col-md-12  col-xs-12 story" ng-show="stories" ng-repeat="story in stories">
+    <div class="col-md-12  col-xs-12 story-header">
+        <div class=" col-md-offset-8 col-xs-offset-8 col-md-2 col-xs-2">
+            {{story.points}}pts
+        </div>
+        <!--
+        <div class="col-md-2 col-xs-2 story-header">
+            <img src="img/ruban.png" height="50"/>
+        </div>
+        -->
+    </div>
+   <div class="story-header author col-md-1 col-md-offset-1 col-xs-2 col-xs-offset-1">
+        <a ng-href="#/profile/{{story.parts[0].author._id}}">
+            <img ng-src="{{story.parts[0].author.avatar}}" on-error-src="img/default.png"/>
+        </a>
+    </div>
+    <div class="col-md-9 col-xs-8 story-header">
+        <a ng-href="#/story/{{story._id}}"><h3>{{story.title}}</h3></a>
+    </div>
+    <div class="col-md-12 col-xs-12 preview" ng-class="{'preview-full':story.expand}">
+        <div  ng-repeat="part in story.parts">
+
+            <!-- PRE TRIGGERS -->
+            <div class="col-md-12  col-xs-12 part  part-peetch" ng-if="($index%4==0 || $index==story.length-1)  && story.triggers.length>0">
+                <div class="part-text part-text-peetch" ng-if="$index%4==0 && $index<story.length-1">
+                    {{story.triggers[$index/4]}}
+                </div>
+                <div class="part-text part-text-peetch" ng-if="$index==story.length-1">
+                    {{story.triggers[story.triggers.length-1]}}
+                </div>
+            </div>
+
+            <!-- PART -->
+            <div class="col-md-11  col-xs-11 part">
+
+                <div class="author col-md-1  col-xs-2">
+                    <a ng-href="#/profile/{{part.author._id}}">
+                        <img ng-src="{{part.author.avatar}}" on-error-src="img/default.png"/>
+                    </a>
+                </div>
+                <div class="part-text">
+                    {{part.text}}
+                    <a class="btn-bubble-small" ng-show="part.author._id==user._id&&$last&&!$first" ng-click="delete(story)">X</a>
+                </div>
+            </div>
+
+            <!-- POST TRIGGERS -->
+            <div class="col-md-12  col-xs-12 part  part-peetch" ng-if="$last && !story.finished && (($index+1)%4==0 || $index+1==story.length-1)  && story.triggers.length>0">
+                <div class="part-text part-text-peetch" ng-if="($index+1)%4==0">
+                    {{story.triggers[($index+1)/4]}}
+                </div>
+                <div class="part-text part-text-peetch" ng-if="$index+1==story.length-1">
+                    {{story.triggers[story.triggers.length-1]}}
+                </div>
+            </div>
+        </div>
+
+        <!-- CONTINUE STORY -->
+        <div class="col-md-10 col-md-offset-1 col-xs-10  col-xs-offset-1  story-footer" ng-show="!story.finished">
+            <textarea  ng-model="story.newPart" class="bubble-text-area" ng-click="checkLogin()" ng-trim="false"></textarea>
+            <div class=" col-md-12  col-xs-12">
+                <button class="btn btn-primary" ng-click="addPart(story)">{{ 'TO_PEETCH' | translate }}</button>
+            </div>
+        </div>
+
+        <!-- MUST CONNECT -->
+        <!--
+        <div class="col-md-12  col-xs-12 part part-peetch" ng-if="!user">
+            <div class="part-text part-text-peetch">
+                Pour continuer l'histoire, inscris-toi <a class="btn-bubble" href="#/login"><i class="glyphicon glyphicon-user"></i></a> ou connecte-toi <a class="btn-bubble" href="#/signup"><i class="glyphicon glyphicon-log-in"></i></a>
+            </div>
+        </div>
+        -->
+
+        <!-- INCOMING TRIGGERS -->
+        <div class="col-md-12  col-xs-12 part  part-peetch" ng-if="user && !story.finished && (((story.parts.length+1)%4==0 && story.parts.length+1!= story.length)|| story.parts.length+1==story.length-1) && story.triggers.length>0">
+            <div class="part-text part-text-peetch" ng-if="(story.parts.length+1)%4==0">
+                {{story.triggers[(story.parts.length+1)/4]}}
+            </div>
+            <div class="part-text part-text-peetch" ng-if="story.parts.length+1==story.length-1">
+                {{story.triggers[story.triggers.length-1]}}
+            </div>
+        </div>
+    </div>
+    <div class="col-md-12 col-xs-12 expand-notice" ng-show="!story.expand && story.parts.length>=3" ng-click="toggleExpand(story)" >
+        {{ 'EXPAND' | translate}}
+        </div>
+    <!--
+    <div class="col-md-12 col-xs-12 story-footer">
+            <a ng-click="{{story.expand = true}}">Voir plus</a>
+    </div>
+    -->
+    <!-- ERROR -->
+    <div class="col-md-12  col-xs-12 alert alert-danger  " ng-show="story.error" ng-click="story.error=undefined">
+        {{story.error}}
+    </div>
+    <!-- FOOTER -->
+    <div class="col-md-12  col-xs-12">
+        <div class="col-md-3 col-xs-3 story-footer">
+            <a ng-click="voting(story,1)"><i class="glyphicon glyphicon-thumbs-up" ng-class="{'voted':story.votes[0].value == 1}" ></i></a>
+        </div>
+        <div class="col-md-3 col-xs-3 story-footer">
+            <a ng-click="voting(story,-1)"><i class="glyphicon glyphicon-thumbs-down" ng-class="{'voted':story.votes[0].value == -1}" ></i></a>
+        </div>
+        <div class="col-md-2 col-xs-2 story-footer">
+            <a href="#/story/{{story._id}}"><i class="glyphicon glyphicon-comment" ></i></a>
+        </div>
+        <div class="col-md-2 col-xs-2 story-footer dropup">
+            <a class="dropdown-toggle" type="button" id="dropdownMenu3" data-toggle="dropdown" aria-expanded="true">
+                <i class="fa fa-share-alt" ></i>
+            </a>
+            <ul ng-social-buttons
+                 class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu3"
+                 data-url="'http://alpha.peetch.co/#/story/'+story._id"
+                 data-title="story.title"
+                 data-description="story.parts[0].text"
+                 data-image="'http://alpha.peetch.co/img/logo.png'">
+                <li class="ng-social-facebook">Facebook</li>
+                <li class="ng-social-google-plus">Google+</li>
+                <li class="ng-social-twitter">Twitter</li>
+            </ul>
+        </div>
+
+        <div class="col-md-2 col-xs-2 story-footer dropup">
+            <a class="dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-expanded="true">
+                <i class="fa fa-ellipsis-h" ></i>
+            </a>
+            <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu2">
+                <li role="presentation"><a role="menuitem" tabindex="-1" ng-click="reporting(story)">{{ 'REPORT' | translate }}</a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+<div class="col-md-12  col-xs-12 center" ng-show="stories&&stories.length>0" >
+    <a ng-click="increaseOffset()" class="btn-bubble"><i class="glyphicon glyphicon-refresh"></i></a>
+</div>
+<div class="col-md-12  col-xs-12 loading" ng-show="!stories||stories.length==0" >
+    <img src="img/loading.gif"/>
+</div>

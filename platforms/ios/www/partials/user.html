@@ -1,0 +1,10 @@
+<div class="col-md-12  col-xs-12 page" >
+    <h1>{{profile.username}}</h1>
+    <div class="col-md-12 form">
+        <img ng-src="{{profile.avatar}}"on-error-src="img/default.png"/>
+    </div>
+    <div class="col-md-12">
+        <h4>{{ 'BIO' | translate }}:</h4>
+        <p>{{profile.bio}}</p>
+    </div>
+</div>

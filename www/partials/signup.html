@@ -1,0 +1,42 @@
+<div class="col-md-12  col-xs-12 page">
+<form class="form-horizontal">
+    <h1>{{ 'CREATE_ACCOUNT' | translate }}</h1>
+    <div class="alert alert-success" role="alert" ng-show="user">{{ 'ACCOUNT_CREATED' | translate }}</div>
+    <div class="alert alert-danger" role="alert" ng-show="error">{{error}}</div>
+<fieldset>
+    
+<!-- Text input-->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="textinput">{{ 'USERNAME' | translate }}</label>  
+  <div class="col-md-4">
+  <input name="textinput" class="form-control input-md" ng-model="username" type="text"/>
+  </div>
+</div>
+
+<!-- Text input-->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="textinput">{{ 'EMAIL' | translate }}</label>  
+  <div class="col-md-4">
+  <input name="textinput" class="form-control input-md" ng-model="email" type="text"/>
+  </div>
+</div>
+
+<!-- Password input-->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="password">{{ 'PASSWORD' | translate }}</label>
+  <div class="col-md-4">
+    <input name="password" class="form-control input-md" ng-model="password" type="password"/>
+  </div>
+</div>
+
+<!-- Button -->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="connexionbutton"></label>
+  <div class="col-md-4">
+    <button name="connexionbutton" class="btn btn-primary" ng-click="signup()">{{ 'CREATE' | translate }}</button>
+  </div>
+</div>
+
+</fieldset>
+</form>
+</div>
