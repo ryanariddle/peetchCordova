@@ -5,15 +5,21 @@ app.controller('LayoutController', ['$scope','$rootScope','$location','$http','u
     if(!$rootScope.lang)
     {
         $rootScope.lang = userService.getLang();
-        console.log($rootScope.user);
-        $translate.use($rootScope.lang);
+        console.log("CHECK THE LANGUAGE: ",$rootScope.lang);
+        if($rootScope.lang)
+            $translate.use($rootScope.lang);
+        else
+            $rootScope.lang = $translate.use();
+        
+        console.log("DEFINE THE LANGUAGE: ",$rootScope.lang);
     }
     
     $scope.checkNotifications = function()
     {
         if($rootScope.user)
         {
-            apiService.getNotifications(headers,function(data)
+            headers = { 'Authorization': "Bearer "+$scope.user.token, 'language': $translate.use() } ; 
+            apiService.getNewNotifications(headers,function(data)
             {
                 $rootScope.newNotifs = [];
                 data.forEach(function(item,index,array)
@@ -38,10 +44,6 @@ app.controller('LayoutController', ['$scope','$rootScope','$location','$http','u
             $scope.checkNotifications();
         }
     }
-
-
-
-
     
     $scope.login = function()
     {
@@ -77,12 +79,13 @@ app.controller('LayoutController', ['$scope','$rootScope','$location','$http','u
             $location.path('/login');
     };
     
-    $scope.changeLanguage = function (key) {
-    $rootScope.lang=key;
-    userService.setLang(key);
-    $translate.use(key);
-  };
+    $scope.changeLanguage = function (key) 
+    {
+        $rootScope.lang=key;
+        userService.setLang(key);
+        $translate.use(key);
+    };
     
-    var timer = setInterval($scope.checkNotifications,60000);
+    var timer = setInterval($scope.checkNotifications,60000); 
  
 }]);

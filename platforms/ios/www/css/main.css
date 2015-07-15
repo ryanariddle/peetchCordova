@@ -163,13 +163,17 @@ body
 
 .story
 {
-    padding-top: 0;
+    padding-top: 20px;
 }
 
 .story-header
 {
-    height: 50px;
-    line-height: 50px;
+
+}
+
+.story-header.author img
+{
+    width:50px;
 }
 
 .story-header h3
@@ -300,11 +304,13 @@ body
     text-align: center;
     background: white;
     border-radius:3px;
+    margin-top: 10px;
 }
 
 .loading img
 {
     margin: 20px;
+    height: 30px;
 }
 
 .story-header
@@ -562,4 +568,10 @@ float: right!important;
 .badge
 {
     background-color: #c0392b;
+}
+
+.no-margin a
+{
+    padding-left: 5px !important;
+    padding-right: 5px !important;
 }

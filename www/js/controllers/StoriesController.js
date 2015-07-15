@@ -13,6 +13,7 @@ app.controller('StoriesController', ['$scope','$rootScope','$location','$http','
         if($location.path().includes('top'))
         {
             apiService.getTopStories($scope.offset,headers,function(data){
+
                 $scope.stories = $scope.stories.concat(data);
                 console.log($scope.stories);
             });
@@ -30,6 +31,7 @@ app.controller('StoriesController', ['$scope','$rootScope','$location','$http','
                 $scope.stories = $scope.stories.concat(data);
                 console.log($scope.stories);
             });
+
         }
     };
     
@@ -119,6 +121,8 @@ app.controller('StoriesController', ['$scope','$rootScope','$location','$http','
         else
             story.expand = !story.expand;
     };
-    
-    //$scope.loadStories();
+    /*
+    if(!$scope.stories)
+        $scope.loadStories();
+        */
 }]);

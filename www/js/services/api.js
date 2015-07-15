@@ -167,4 +167,13 @@ app.service('apiService', ["$http","urlService", function ($http,urlService) {
         }).success(success).error(error);
     };
     
+    this.getNewNotifications = function(headers,success,error)
+    {
+        $http({
+            method: "get",
+            url: urlService.newNotifications(),
+            headers:headers
+        }).success(success).error(error);
+    };
+    
 }]);

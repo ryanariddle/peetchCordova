@@ -1,16 +1,12 @@
 //Define an angular module for our app
-var app = angular.module('peetch', ['ngRoute','ngImgCrop', 'LocalStorageModule','ngSocial','ngSanitize','infinite-scroll','pascalprecht.translate']);
+var app = angular.module('peetch', ['ngRoute','ngImgCrop','ngSocial','ngSanitize','infinite-scroll','pascalprecht.translate']);
 
  
 //Define Routing for app
 //Uri /AddNewOrder -> template add_order.html and Controller AddOrderController
 //Uri /ShowOrders -> template show_orders.html and Controller AddOrderController
 
-app.run([
-      '$rootScope', function ($rootScope) {
-          $rootScope.facebookAppId = '1620176758214483'; // set your facebook app id here
-      }
-  ]);
+
 
 app.config(['$routeProvider','$translateProvider',
 function($routeProvider,$translateProvider) {
@@ -110,8 +106,8 @@ function($routeProvider,$translateProvider) {
         'CONTRIBUTED': ' contributed to your story ',
         'COMMENTED': ' wrote a comment on your story ',
         'EXPAND':'Click to expand',
-        'MUST_IMAGE':'Your file must be an image!'
-        
+        'MUST_IMAGE':'Your file must be an image!',
+        'NO_STORY':'No stories were found...'
     })
     .translations('fr', {
         'POPULAR':'Populaire',
@@ -156,8 +152,8 @@ function($routeProvider,$translateProvider) {
         'CONTRIBUTED': ' a contribué à votre histoire ',
         'COMMENTED': ' a commenté votre histoire ',
         'EXPAND':'Cliquer pour tout afficher',
-        'MUST_IMAGE':'Votre fichier doit être une image !'
-
+        'MUST_IMAGE':'Votre fichier doit être une image !',
+        'NO_STORY':'Aucune histoire n\'a été trouvé...'
     })
     .fallbackLanguage('en')
     .determinePreferredLanguage();
@@ -165,3 +161,9 @@ function($routeProvider,$translateProvider) {
     //$translateProvider.rememberLanguage(true);
     
 }]);
+
+app.run([
+      '$rootScope', function ($rootScope) {
+          $rootScope.facebookAppId = '1620176758214483'; // set your facebook app id here
+      }
+  ]);

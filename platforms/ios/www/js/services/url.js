@@ -20,6 +20,7 @@ app.service('urlService', function () {
     this.forgot         = function()    { return this.host+"/forgot/";          };
     this.me             = function()    { return this.host+"/me/";              };
     this.notifications  = function()    { return this.host+"/me/notifications"; };
+    this.newNotifications  = function() { return this.host+"/me/notifications/new"; };
     this.signup         = function()    { return this.host+"/signup/";          };
 
     
